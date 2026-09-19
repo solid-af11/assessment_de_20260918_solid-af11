@@ -10,3 +10,4 @@ dbt/logs/
 .ipynb_checkpoints/
 notebooks/walkthrough.reproduced.ipynb
 .DS_Store
+notebooks/*.reproduced.ipynb
