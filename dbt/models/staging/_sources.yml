@@ -1,0 +1,32 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: weather_daily
+        description: >
+          Raw daily weather records loaded from the Open-Meteo historical
+          archive API, one row per (city, date). Fields are unmodified
+          from the API response, plus a loaded_at audit timestamp.
+        columns:
+          - name: city
+            description: City name, matches config/cities.yml.
+            data_tests:
+              - not_null
+          - name: date
+            description: The logical date this weather reading is for.
+            data_tests:
+              - not_null
+          - name: temperature_2m_max
+            description: Max daily temperature (°C).
+          - name: temperature_2m_min
+            description: Min daily temperature (°C).
+          - name: temperature_2m_mean
+            description: Mean daily temperature (°C).
+          - name: precipitation_sum
+            description: Total daily precipitation (mm).
+          - name: windspeed_10m_max
+            description: Max daily windspeed (km/h).
+          - name: loaded_at
+            description: Timestamp this row was loaded by the ingestion job.

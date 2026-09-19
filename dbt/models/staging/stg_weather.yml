@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: stg_weather
+    description: >
+      Typed and cleaned daily weather readings, one row per (city, weather_date).
+    columns:
+      - name: city
+        description: City name.
+        data_tests:
+          - not_null
+      - name: weather_date
+        description: The date this reading is for.
+        data_tests:
+          - not_null
+      - name: temp_max_c
+        description: Max daily temperature in Celsius.
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: -90
+              max_value: 60
+      - name: temp_min_c
+        description: Min daily temperature in Celsius.
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: -90
+              max_value: 60
+      - name: precipitation_mm
+        description: Total daily precipitation in millimetres.
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 2000
+      - name: windspeed_max_kmh
+        description: Max daily windspeed in km/h.
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 500
+
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - city
+            - weather_date
