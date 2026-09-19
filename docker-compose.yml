@@ -36,6 +36,7 @@ services:
       WAREHOUSE_USER: ${POSTGRES_USER:-de}
       WAREHOUSE_PASSWORD: ${POSTGRES_PASSWORD:-de}
       DBT_PROFILES_DIR: /opt/airflow/dbt
+      PYTHONPATH: /opt/airflow
     volumes: &pipeline_volumes
       - ./dags:/opt/airflow/dags
       - ./ingestion:/opt/airflow/ingestion
